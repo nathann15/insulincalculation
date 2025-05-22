@@ -117,7 +117,13 @@
     <button type="button" onclick="resetForm()">Reset</button>
   </form>
 
+
+
+
+
   <script>
+
+
     const carbstoeatInput = document.getElementById("carbstoeat");
     const carbratioInput = document.getElementById("carbratio");
     const carbbolusInput = document.getElementById("carbbolus");
@@ -155,8 +161,8 @@
         carbbolusInput.value = bolus.toFixed(1);
         carbTotalBolusInput.value = bolus.toFixed(1);
       } else {
-        carbbolusInput.value = "";
-        carbTotalBolusInput.value = "";
+        carbbolusInput.value = "0.0";
+        carbTotalBolusInput.value = "0.0";
       }
 
       updateTotalBolus();
@@ -188,9 +194,9 @@
       correctionTotalBolusInput.value = "0.0";
     }
   } else {
-    amountToCorrectInput.value = "";
-    correctionBolusInput.value = "";
-    correctionTotalBolusInput.value = "";
+    amountToCorrectInput.value = "0.0";
+    correctionBolusInput.value = "0.0";
+    correctionTotalBolusInput.value = "0.0";
   }
 
   updateTotalBolus();
