@@ -61,7 +61,7 @@
     <div>
       <h3>1) Calculate <strong>Carbohydrate Bolus</strong></h3>
       <label for="carbstoeat">Carbohydrates to Eat:</label>
-      <input id="carbstoeat" type="number" />
+      <input id="carbstoeat" type="number" style="background-color: yellow;"/>
 
       <label for="carbratio">Carbohydrate Ratio:</label>
       <input id="carbratio" type="number" value="20" disabled />
@@ -76,7 +76,7 @@
     <div>
       <h3>2) Calculate <strong>Correction Bolus</strong></h3>
       <label for="glucose">Glucose:</label>
-      <input id="glucose" type="number" />
+      <input id="glucose" type="number" style="background-color: yellow;"/>
 
       <label for="correctiontarget">Correction Target:</label>
       <input id="correctiontarget" type="number" value="120" disabled />
@@ -108,7 +108,7 @@
       <input id="totalbolus" type="number" disabled />
 
       <label for="totalroundedbolus">Total Rounded Bolus:</label>
-      <input id="totalroundedbolus" type="number" disabled style="font-weight: bold;"/>
+      <input id="totalroundedbolus" type="number" disabled style="font-weight: bold; background-color: cyan;"/>
     </div>
 
     <br>
@@ -164,22 +164,27 @@
 
     function updateCorrectionBolus() {
       const glucose = parseFloat(glucoseInput.value);
-      const target = parseFloat(correctionTargetInput.value);
-      const factor = parseFloat(correctionFactorInput.value);
+  const target = parseFloat(correctionTargetInput.value);
+  const factor = parseFloat(correctionFactorInput.value);
 
-      if (!isNaN(glucose) && !isNaN(target) && !isNaN(factor) && factor !== 0) {
-        const diff = glucose - target;
-        amountToCorrectInput.value = diff.toFixed(0);
-        const bolus = diff / factor;
-        correctionBolusInput.value = bolus.toFixed(1);
-        correctionTotalBolusInput.value = bolus.toFixed(1);
-      } else {
-        amountToCorrectInput.value = "";
-        correctionBolusInput.value = "";
-        correctionTotalBolusInput.value = "";
-      }
+  if (!isNaN(glucose) && !isNaN(target) && !isNaN(factor) && factor !== 0) {
+    const diff = glucose - target;
+    amountToCorrectInput.value = diff.toFixed(0);
+    const bolus = diff / factor;
+    correctionBolusInput.value = bolus.toFixed(1);
 
-      updateTotalBolus();
+    if (glucose > target) {
+      correctionTotalBolusInput.value = bolus.toFixed(1);
+    } else {
+      correctionTotalBolusInput.value = "0.0";
+    }
+  } else {
+    amountToCorrectInput.value = "";
+    correctionBolusInput.value = "";
+    correctionTotalBolusInput.value = "";
+  }
+
+  updateTotalBolus();
     }
 
     function updateTotalBolus() {
