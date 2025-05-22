@@ -63,11 +63,11 @@
       <label for="carbstoeat">Carbohydrates to Eat:</label>
       <input id="carbstoeat" type="number" style="background-color: yellow;"/>
 
-      <label for="carbratio">Carbohydrate Ratio:</label>
-      <input id="carbratio" type="number" value="20" disabled />
+      <label for="carbratio" hidden>Carbohydrate Ratio:</label>
+      <input id="carbratio" type="number" value="20" disabled hidden/>
 
-      <label for="carbbolus">Carbohydrate Bolus:</label>
-      <input id="carbbolus" type="number" disabled />
+      <label for="carbbolus" hidden>Carbohydrate Bolus:</label>
+      <input id="carbbolus" type="number" disabled hidden/>
     </div>
 
     <br>
@@ -78,17 +78,17 @@
       <label for="glucose">Glucose:</label>
       <input id="glucose" type="number" style="background-color: yellow;"/>
 
-      <label for="correctiontarget">Correction Target:</label>
-      <input id="correctiontarget" type="number" value="120" disabled />
+      <label for="correctiontarget" hidden>Correction Target:</label>
+      <input id="correctiontarget" type="number" value="120" disabled hidden/>
 
-      <label for="amounttocorrect">Amount to Correct:</label>
-      <input id="amounttocorrect" type="number" disabled />
+      <label for="amounttocorrect" hidden>Amount to Correct:</label>
+      <input id="amounttocorrect" type="number" disabled hidden/>
 
-      <label for="correctionfactor">Correction Factor:</label>
-      <input id="correctionfactor" type="number" value="75" disabled />
+      <label for="correctionfactor" hidden>Correction Factor:</label>
+      <input id="correctionfactor" type="number" value="75" disabled hidden/>
 
-      <label for="correctionbolus">Correction Bolus:</label>
-      <input id="correctionbolus" type="number" disabled />
+      <label for="correctionbolus" hidden>Correction Bolus:</label>
+      <input id="correctionbolus" type="number" disabled hidden/>
     </div>
 
     <br>
@@ -115,6 +115,7 @@
     <hr>
 
     <button type="button" onclick="resetForm()">Reset</button>
+    <button type="button" onclick="showhideCalc()">Show/Hide Calculations</button>
   </form>
 
 
@@ -123,6 +124,30 @@
 
   <script>
 
+
+function showhideCalc(){
+ const ids = [
+    "carbratio",
+    "carbbolus",
+    "correctiontarget",
+    "amounttocorrect",
+    "correctionfactor",
+    "correctionbolus"
+  ];
+
+  ids.forEach(id => {
+    const input = document.getElementById(id);
+    const label = document.querySelector(`label[for="${id}"]`);
+
+    if (input) {
+      input.hidden = !input.hidden;
+    }
+
+    if (label) {
+      label.hidden = !label.hidden;
+    }
+  });
+}
 
     const carbstoeatInput = document.getElementById("carbstoeat");
     const carbratioInput = document.getElementById("carbratio");
