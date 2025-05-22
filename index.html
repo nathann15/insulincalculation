@@ -163,9 +163,18 @@
     }
 
     function updateCorrectionBolus() {
-      const glucose = parseFloat(glucoseInput.value);
-  const target = parseFloat(correctionTargetInput.value);
-  const factor = parseFloat(correctionFactorInput.value);
+  let glucose = parseFloat(glucoseInput.value);
+  let target = parseFloat(correctionTargetInput.value);
+  let factor = parseFloat(correctionFactorInput.value);
+
+  const glucoseBlankOrInvalid =
+    glucoseInput.value === "" || isNaN(glucose) || glucose <= 0;
+
+  if (glucoseBlankOrInvalid || glucose < target) {
+    glucose = 0;
+    target = 0;
+    factor = 0;
+  }
 
   if (!isNaN(glucose) && !isNaN(target) && !isNaN(factor) && factor !== 0) {
     const diff = glucose - target;
@@ -186,6 +195,8 @@
 
   updateTotalBolus();
     }
+
+    
 
     function updateTotalBolus() {
       const carbBolus = parseFloat(carbbolusInput.value);
